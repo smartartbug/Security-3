@@ -60,7 +60,7 @@ public class Security1 {
                 charfile += input;
             }   
             Pattern pattern;
-            pattern = Pattern.compile("\\%(B)\\d*\\^\\p{Alpha}*\\/\\p{Alpha}*\\^\\d*\\w*\\?");//\\p{Alpha}*\\^\\d{7}\\w*\\?");
+            pattern = Pattern.compile("\\%(B)\\d*\\^\\p{Alpha}*\\/\\p{Alpha}*\\^\\d*\\w*\\?");
             Matcher matcher;
             matcher = pattern.matcher(charfile);
             int found = 0;
