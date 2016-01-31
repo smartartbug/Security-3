@@ -16,19 +16,22 @@ public class Security1 {
      * @throws java.io.FileNotFoundException
      */
     public static void main(String[] args) throws FileNotFoundException {                 
+        //initialize variables
         String name;
         String number;
         String date;
         String cvc;
         
         LinkedList results;
+        //set results to the matched strings found in getInfo
         results = getInfo();
         
         int count = results.size();
         
         System.out.println(count + " credit card record(s) found.\n");
         for(int i = 1; i <= results.size(); i++)
-        {            
+        {         
+            //extract info from string and print
             String result = (String)results.get(i - 1);
             String[] fields = result.split("\\^");
             
@@ -49,25 +52,32 @@ public class Security1 {
     
     public static LinkedList getInfo()throws FileNotFoundException
     {
+        //open file
         File file = new File("C:\\Users\\smart_000\\Documents\\memorydump(1).dmp");
         LinkedList matches;
         try (Scanner scanner = new Scanner(file)) {
             String charfile = "";
             String input;
+            
+            //read file into single string, charfile
             while(scanner.hasNextLine())
             {
                 input = scanner.nextLine();
                 charfile += input;
             }   
+            
             Pattern pattern;
+            
+            //set pattern to be matched
             pattern = Pattern.compile("\\%(B)\\d*\\^\\p{Alpha}*\\/\\p{Alpha}*\\^\\d*\\w*\\?");
+            
             Matcher matcher;
             matcher = pattern.matcher(charfile);
-            int found = 0;
             matches = new LinkedList();
+            
+            //read regex matches into matches
             while (matcher.find()){
                 matches.add(matcher.group());
-                found += 1;
             }
         }
         return matches;
